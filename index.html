@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malla Curricular Medicina - Selena</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9f9fb;
+      color: #333;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #5a3e85;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .semestre {
+      background: #fff;
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    .semestre h2 {
+      color: #6a44a5;
+      font-size: 1.1rem;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 0.5rem;
+    }
+    .materia {
+      padding: 0.4rem;
+      margin: 0.3rem 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .materia:hover {
+      background: #f0e9ff;
+    }
+    .aprobada {
+      background: #c8e6c9 !important;
+      text-decoration: line-through;
+      color: #2e7d32;
+    }
+  </style>
+</head>
+<body>
+  <h1>Malla Curricular Medicina - Para Selena 💜</h1>
+  <div class="grid" id="malla"></div>
+
+  <script>
+    const estructura = {
+      'I Semestre': [
+        'Anatomía Humana I', 'Histología Humana I', 'Embriología Humana I', 'Biofísica Médica', 'Biología Molecular', 'Integrador I'
+      ],
+      'II Semestre': [
+        'Anatomía Humana II', 'Histología Humana II', 'Embriología Humana II', 'Bioquímica', 'Fisiología Médica I', 'Integrador II'
+      ],
+      'III Semestre': [
+        'Anatomía Humana III', 'Histología Humana III', 'Embriología Humana III', 'Fisiología Médica II', 'Optativo I', 'Integrador III'
+      ],
+      'IV Semestre': [
+        'Patología Médica I', 'Farmacología Médica I', 'Fisiopatología y Semiología Médica I', 'Inmunología', 'Optativo II', 'Integrador IV'
+      ],
+      'V Semestre': [
+        'Patología Médica II', 'Farmacología Médica II', 'Microbiología Médica', 'Fisiopatología y Semiología Médica II', 'Higiene y Epidemiología', 'Integrador V'
+      ],
+      'VI Semestre': [
+        'Farmacología Médica III', 'Fisiopatología y Semiología Médica III', 'Parasitología Médica', 'Psicología Médica', 'Investigación en Salud I', 'Integrador VI'
+      ],
+      'VII Semestre': [
+        'Investigación en Salud II', 'Cirugía General', 'Oftalmología', 'Otorrinolaringología', 'Optativo III', 'Práctica Preprofesional I'
+      ],
+      'VIII Semestre': [
+        'Salud Ocupacional', 'Medicina Interna', 'Dermatología', 'Imagenología', 'Psiquiatría', 'Práctica Preprofesional II'
+      ],
+      'IX Semestre': [
+        'Epidemiología Analítica', 'Ginecobstetricia', 'Farmacología Clínica', 'Optativo IV', 'Práctica Preprofesional III'
+      ],
+      'X Semestre': [
+        'Administración en Salud', 'Pediatría', 'Medicina Legal', 'Optativo V', 'Práctica Preprofesional IV', 'Modalidad de Graduación'
+      ],
+      'XI Semestre': [
+        'Medicina Interna', 'Gineco-Obstetricia', 'Pediatría'
+      ],
+      'XII Semestre': [
+        'Cirugía General', 'Atención Primaria en Salud'
+      ]
+    };
+
+    const progreso = JSON.parse(localStorage.getItem('mallaProgreso') || '{}');
+
+    const mallaDiv = document.getElementById('malla');
+
+    for (const [semestre, materias] of Object.entries(estructura)) {
+      const col = document.createElement('div');
+      col.className = 'semestre';
+      col.innerHTML = `<h2>${semestre}</h2>`;
+
+      materias.forEach(materia => {
+        const div = document.createElement('div');
+        div.className = 'materia';
+        div.textContent = materia;
+        const key = semestre + '-' + materia;
+
+        if (progreso[key]) div.classList.add('aprobada');
+
+        div.onclick = () => {
+          div.classList.toggle('aprobada');
+          progreso[key] = div.classList.contains('aprobada');
+          localStorage.setItem('mallaProgreso', JSON.stringify(progreso));
+        };
+
+        col.appendChild(div);
+      });
+
+      mallaDiv.appendChild(col);
+    }
+  </script>
+</body>
+</html>
