@@ -3,57 +3,89 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Malla Curricular Medicina - Selena</title>
+  <title>Mi princesita y doctorcita fav Selena 💖</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f9f9fb;
-      color: #333;
+      background: #fffafc;
+      color: #3a2b41;
       margin: 0;
       padding: 2rem;
     }
-    h1 {
+    header {
       text-align: center;
-      color: #5a3e85;
+    }
+    header img {
+      width: 80px;
+      margin-bottom: 0.5rem;
+    }
+    h1 {
+      font-size: 1.8rem;
+      color: #d33682;
+      margin: 0.2rem 0;
+    }
+    h2.subtitle {
+      font-size: 1rem;
+      font-weight: normal;
+      color: #6c3d8f;
+      margin-bottom: 2rem;
     }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1.5rem;
-      margin-top: 2rem;
     }
     .semestre {
       background: #fff;
-      border: 2px solid #ddd;
-      border-radius: 12px;
+      border: 2px solid #f5b1d7;
+      border-radius: 14px;
       padding: 1rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 10px rgba(220, 140, 200, 0.1);
     }
     .semestre h2 {
-      color: #6a44a5;
+      color: #c2185b;
       font-size: 1.1rem;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #f3c5e0;
       padding-bottom: 0.5rem;
+      text-align: center;
     }
     .materia {
       padding: 0.4rem;
       margin: 0.3rem 0;
       border-radius: 8px;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background 0.3s, transform 0.2s;
     }
     .materia:hover {
-      background: #f0e9ff;
+      background: #fdf1f7;
+      transform: scale(1.02);
     }
     .aprobada {
-      background: #c8e6c9 !important;
+      background: #d3ffd3 !important;
       text-decoration: line-through;
       color: #2e7d32;
+    }
+    .brillitos {
+      text-align: center;
+      background: #d1ffd7;
+      padding: 0.5rem 1rem;
+      margin: 1rem auto 2rem auto;
+      border-radius: 10px;
+      color: #2e7d32;
+      font-weight: bold;
+      width: fit-content;
     }
   </style>
 </head>
 <body>
-  <h1>Malla Curricular Medicina - Para Selena 💜</h1>
+  <header>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/LogoFacultadMedicinaUNANManagua.png/600px-LogoFacultadMedicinaUNANManagua.png" alt="Logo UNAN Managua" />
+    <h1>👑 Mi princesita y doctorcita fav Selena 💖</h1>
+    <h2 class="subtitle">✨ Siempre creo en ti mi preciosa ♡ ✨</h2>
+  </header>
+
+  <div class="brillitos">🌟 ¡Felicidades Selena, eres la mejor! 🌟</div>
+
   <div class="grid" id="malla"></div>
 
   <script>
@@ -97,7 +129,6 @@
     };
 
     const progreso = JSON.parse(localStorage.getItem('mallaProgreso') || '{}');
-
     const mallaDiv = document.getElementById('malla');
 
     for (const [semestre, materias] of Object.entries(estructura)) {
